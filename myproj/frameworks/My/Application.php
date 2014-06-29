@@ -12,5 +12,10 @@ namespace My;
  * @author baohua
  */
 class Application {
+
+    public function run() {
+        
+    }
+
     //put your code here
 }
