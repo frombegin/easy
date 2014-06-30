@@ -26,7 +26,7 @@ class Registry {
     public function getOrThrow($key) {
         $value = $this->get($key);
         if (is_null($value)) {
-            throw BadConfigurationException("$key . is NOT found.");
+            throw BadConfigurationException("$key is NOT found.");
         }
         return $value;
     }
