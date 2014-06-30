@@ -19,8 +19,16 @@ class Registry {
      * @param string $key
      * @return mixed|null return value of key
      */
-    public function get($key) {
+    public function get($key, $default = NULL) {
         
+    }
+
+    public function getCheckNotNull($key) {
+        $value = $this->get($key);
+        if (is_null($value)) {
+            throw BadConfigurationException("$key . is NOT found.");
+        }
+        return $value;
     }
 
     /**

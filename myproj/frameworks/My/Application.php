@@ -32,10 +32,7 @@ class Application {
     public function getPdo() {
         $pdo = $this->registry->get('pdo');
         if (is_null($pdo)) {
-            $pdoOptions = $this->registry->get('pdo.options');
-            if (is_null($pdoOptions)) {
-                throw BadConfigurationException('pdo.options is NOT found.');
-            }
+            $pdoOptions = $this->registry->getCheckNotNull('pdo.options');
             $pdo = new \PDO($pdoOptions['dsn'], $pdoOptions['username'], 
                     $pdoOptions['passwd'], $pdoOptions['options']);
             $this->registry->set('pdo', $pdo);
@@ -44,7 +41,17 @@ class Application {
     }
 
     public function getCache() {
-        
+        $cache = $this->registry->get('cache');
+        if (is_null($cache)) {
+            $cacheType = $this->registry->getCheckNotNull('cache.type');
+            $cache = new $cacheType();
+            $cacheOptions = $this->registry->getCheckNotNull('cache.options');
+            if ($cache instanceof IConfigurable) {
+                $cache->config($cacheOptions);
+            }
+            $this->registry->set('cache', $cache);
+        }
+        return $cache;
     }
 
     public function getResponse() {
