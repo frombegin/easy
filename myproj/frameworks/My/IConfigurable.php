@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * copyright (c) 2014, frombegin at gmail.com
+ */
+
 namespace My;
 
 /**
@@ -8,6 +12,7 @@ namespace My;
  * @version 1.0
  */
 interface IConfigurable {
+
     /**
      * config use options(array)
      * 

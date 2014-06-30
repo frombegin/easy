@@ -1,7 +1,7 @@
 <#if licenseFirst??>
 ${licenseFirst}
 </#if>
-${licensePrefix}copyright (c) 2014, frombegin at gmail.com.
+${licensePrefix}copyright (c) 2014, frombegin at gmail.com
 <#if licenseLast??>
 ${licenseLast}
 </#if>

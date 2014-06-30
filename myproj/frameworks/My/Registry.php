@@ -1,7 +1,7 @@
 <?php
 
 /*
- * copyright (c) 2014, frombegin at gmail.com.
+ * copyright (c) 2014, frombegin at gmail.com
  */
 
 namespace My;
@@ -22,7 +22,7 @@ class Registry {
     public function get($key) {
         
     }
-    
+
     /**
      * set value of key
      * 
@@ -32,4 +32,5 @@ class Registry {
     public function set($key, $value) {
         
     }
+
 }
