@@ -11,7 +11,7 @@ namespace My;
  *
  * @author baohua
  */
-class Dispatcher {
+class Dispatcher extends Component {
 
     private $routers = null;
 
