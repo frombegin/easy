@@ -40,5 +40,13 @@ class Registry {
     public function set($key, $value) {
         
     }
+    
+    /**
+     * 
+     * @param string $key
+     */
+    public function delete($key) {
+        
+    }
 
 }
