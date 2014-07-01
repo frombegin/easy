@@ -4,7 +4,7 @@
  * copyright (c) 2014, frombegin at gmail.com
  */
 
-namespace My\Search;
+namespace My;
 
 /**
  * Search interface
