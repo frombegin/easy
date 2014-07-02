@@ -41,7 +41,8 @@ class Dispatcher extends Component {
      * @param \My\Request $request
      * @param \My\Response $response
      */
-    public function dispatch(Request $request, Response $response) {
+    public function dispatch() {
+        //Request $request, Response $response
         
     }
 

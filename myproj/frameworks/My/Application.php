@@ -11,7 +11,7 @@ namespace My;
  *
  * @author baohua
  */
-class Application {
+class Application extends Object {
 
 // use Registry instead
 // ---------------------
@@ -19,9 +19,17 @@ class Application {
 //    private $cacheFactory = null;
 //    private $pdo = null;
 //    private $pdoFactory = null;
+
+    const EVENTID_BEFORE_STARTUP = 'application.before.startup';
+    const EVENTID_AFTER_STARTUP = 'application.after.startup';
+    const EVENTID_BEFORE_SHUTDOWN = 'application.before.shutdown';
+    const EVENTID_AFTER_SHUTDOWN = 'application.after.shutdown';
+
     private $registry = null;
 
-    public function __construct() {
+    private $dispatcher = null;
+    
+    public function __construct($config) {
         $this->registry = new Registry();
     }
 
@@ -62,15 +70,20 @@ class Application {
     }
 
     public function startup() {
-        
+        $this->fireEvent(self::EVENTID_BEFORE_STARTUP, NULL);
+        //TODO: startup
+        $this->fireEvent(self::EVENTID_AFTER_STARTUP, NULL);
     }
 
     public function shutdown() {
-        
+        $this->fireEvent(self::EVENTID_BEFORE_SHUTDOWN, NULL);
+        //TODO: shutdown
+        $this->fireEvent(self::EVENTID_AFTER_SHUTDOWN, NULL);
     }
 
     public function main() {
-        
+        $this->dispatcher = new Dispatcher();
+        $this->dispatcher->dispatch();
     }
 
     public function handleException($e) {

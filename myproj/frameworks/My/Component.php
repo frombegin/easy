@@ -11,28 +11,37 @@ namespace My;
  *
  * @author baohua
  */
-class Component {
-
+class Component extends Configuration {
+    
     /**
      * initialzie component
      */
     public function initialize() {
         
     }
-    
+
     /**
      * finalize component
      */
     public function finalize() {
         
     }
+
     /**
-     * get logger of THIS component
+     * 
+     * @return string
+     */
+    public function getName() {
+        return __CLASS__;
+    }
+
+    /**
+     * get logger
      * 
      * @return ILogger
      */
     public function getLogger() {
         
     }
-    
+
 }
