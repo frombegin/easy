@@ -14,6 +14,19 @@ namespace My;
 class Component {
 
     /**
+     * initialzie component
+     */
+    public function initialize() {
+        
+    }
+    
+    /**
+     * finalize component
+     */
+    public function finalize() {
+        
+    }
+    /**
      * get logger of THIS component
      * 
      * @return ILogger
