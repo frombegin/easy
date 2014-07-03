@@ -11,7 +11,7 @@ namespace My\Core;
  *
  * @author baohua
  */
-class Application {
+class Application extends Component {
 
     private static $instance = null;
     private $registry = null;
@@ -19,18 +19,20 @@ class Application {
     private $components = array();
 
     public function getInstance() {
-        assert(self::$instance, "you haven't create application.");
+        assert(self::$instance, "you haven't create application yet.");
         return self::$instance;
     }
 
-    public function __construct($config) {
+    public function __construct() {
         assert(is_null(self::$instance), 'you have an application instance already.');
-        self::$instance = $this;
-        $this->config = $config;
-        $this->registry = new Registry();
+        parent::__construct();
     }
 
-    public function createComponent($name) {
+    public function config($options) {
+        $this->config = $options;
+    }
+
+    protected function createComponent($name) {
         if (!isset($this->config[$name])) {
             throw new BadConfigurationException("component \"$name\" is NOT found!");
         }
@@ -58,23 +60,16 @@ class Application {
     }
 
     public function getRegistry() {
-        return $this->registry;
-    }
-
-    public function getPdo() {
-        $pdo = $this->registry->get('pdo');
-        if (is_null($pdo)) {
-            $pdoOptions = $this->registry->getOrThrow('pdo.options');
-            $pdo = new \PDO($pdoOptions['dsn'], $pdoOptions['username'], $pdoOptions['passwd'], $pdoOptions['options']);
-            $this->registry->set('pdo', $pdo);
+        if (is_null($this->registry)) {
+            $this->registry = new Registry();
         }
-        return $pdo;
+        return $this->registry;
     }
 
     public function getCache() {
         return $this->getComponent('cache');
     }
-    
+
     public function getDbEngine() {
         return $this->getComponent('dbengine');
     }

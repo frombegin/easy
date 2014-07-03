@@ -17,10 +17,9 @@ if ($isDeveloping) {
 }
 
 // create application & run
-$app = new My\Core\Application($config);
+$app = new My\Core\Application();
+$app->config($config);
 $app->run();
-
-
 var_dump($app->getComponent('cache'));
 var_dump($app->getCache());
 var_dump($app->getDbEngine());
