@@ -4,13 +4,13 @@
  * copyright (c) 2014, frombegin at gmail.com
  */
 
-namespace My;
+namespace My\Core;
 
 /**
- * Description of BadConfigurationException
+ * Description of Response
  *
  * @author baohua
  */
-class BadConfigurationException extends Exception {
+class Response {
     //put your code here
 }

@@ -4,13 +4,13 @@
  * copyright (c) 2014, frombegin at gmail.com
  */
 
-namespace My;
+namespace My\Core;
 
 /**
- * Description of Response
+ * Description of Request
  *
  * @author baohua
  */
-class Response {
+class Request {
     //put your code here
 }

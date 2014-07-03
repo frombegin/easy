@@ -4,13 +4,13 @@
  * copyright (c) 2014, frombegin at gmail.com
  */
 
-namespace My;
+namespace My\Data;
 
 /**
- * Description of Exception
  *
  * @author baohua
  */
-class Exception {
-    //put your code here
+interface IEntity {
+
+    public function getId();
 }

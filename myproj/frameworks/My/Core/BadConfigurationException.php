@@ -4,13 +4,13 @@
  * copyright (c) 2014, frombegin at gmail.com
  */
 
-namespace My;
+namespace My\Core;
 
 /**
- * Description of Request
+ * Description of BadConfigurationException
  *
  * @author baohua
  */
-class Request {
+class BadConfigurationException extends Exception {
     //put your code here
 }
