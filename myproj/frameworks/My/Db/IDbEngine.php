@@ -4,13 +4,11 @@
  * copyright (c) 2014, frombegin at gmail.com
  */
 
-namespace My\Data;
+namespace My\Db;
 
 /**
  *
  * @author baohua
  */
-interface IEntity {
-
-    public function getId();
+interface IDbEngine {
 }

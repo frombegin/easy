@@ -11,7 +11,7 @@ namespace My\Core;
  *
  * @author baohua
  */
-class Component extends Object {
+abstract class Component extends Object implements IConfigurable {
 
     /**
      * get logger of THIS component
