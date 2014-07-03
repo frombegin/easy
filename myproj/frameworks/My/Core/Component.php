@@ -11,7 +11,7 @@ namespace My\Core;
  *
  * @author baohua
  */
-class Component {
+class Component extends Object {
 
     /**
      * get logger of THIS component
@@ -21,5 +21,5 @@ class Component {
     public function getLogger() {
         
     }
-    
+
 }

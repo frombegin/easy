@@ -16,7 +16,7 @@ interface ICompareable {
     /**
      * compare with other object
      * 
-     * @param \My\ICompareable $other
+     * @param \My\Core\ICompareable $other
      * @return int
      */
     public function compare(ICompareable $other);

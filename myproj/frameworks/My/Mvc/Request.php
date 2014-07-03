@@ -4,12 +4,13 @@
  * copyright (c) 2014, frombegin at gmail.com
  */
 
-namespace My\Core;
+namespace My\Mvc;
 
 /**
- * Description of Exception
+ * Description of Request
  *
  * @author baohua
  */
-class Exception extends \Exception {
+class Request {
+    //put your code here
 }

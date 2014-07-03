@@ -7,10 +7,11 @@
 namespace My\Core;
 
 /**
- * Description of Response
  *
  * @author baohua
  */
-class Response {
-    //put your code here
+interface IEventListener {
+
+    public function handleEvent($event);
+    
 }
