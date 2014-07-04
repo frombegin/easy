@@ -9,7 +9,7 @@ require_once dirname(__DIR__) . '/frameworks/My/Autoloader.php';
 My\Autoloader::register();
 
 // load application config
-$isDeveloping = true;
+$isDeveloping = TRUE;
 if ($isDeveloping) {
     $config = require_once dirname(__DIR__) . '/modules/config.development.php';
 } else {
@@ -20,6 +20,7 @@ if ($isDeveloping) {
 $app = new My\Core\Application();
 $app->config($config);
 $app->run();
+
 var_dump($app->getComponent('cache'));
 var_dump($app->getCache());
 var_dump($app->getDbEngine());

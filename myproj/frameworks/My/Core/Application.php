@@ -13,10 +13,16 @@ namespace My\Core;
  */
 class Application extends Component {
 
+    const EVENT_APPLICATION_INITIALIZE = 'event.application.initialize';
+    const EVENT_APPLICATION_FINALIZE = 'event.application.finalize';
+
     private static $instance = null;
     private $registry = null;
     private $config = null;
     private $components = array();
+    private $modules = array(); // array of name => Module()
+    
+    private $projectRoot = NULL;
 
     public function getInstance() {
         assert(self::$instance, "you haven't create application yet.");
@@ -27,17 +33,40 @@ class Application extends Component {
         assert(is_null(self::$instance), 'you have an application instance already.');
         parent::__construct();
     }
+    
+    protected function createModules($moduleNames) {
+        $modulesRootDir = $this->projectRoot . '/modules';
+        foreach($moduleNames as $moduleName) {
+            $module = new Module($moduleName);
+            if($module instanceof IConfigurable) {
+                $moduleConfigFilename = $modulesRootDir . '/' . $moduleName . '/config.php';
+                $options = require_once $moduleConfigFilename;
+                $module->config($options);
+            }
+            $this->modules[$moduleName] = $module;
+        }
+    }
 
     public function config($options) {
+        assert(isset($options['project']), 'Bad application configuation: project key must exists.');
+        assert(isset($options['components']), 'Bad Application configuation: components key must exists.');
+        assert(isset($options['modules']), 'Bad application configuation: modules key must exists.');
+        
         $this->config = $options;
+        $this->projectRoot = $options['project']['root'];
+        $this->createModules($options['modules']);
+    }
+    
+    public function getProjectRoot() {
+        return $this->projectRoot;
     }
 
     protected function createComponent($name) {
-        if (!isset($this->config[$name])) {
-            throw new BadConfigurationException("component \"$name\" is NOT found!");
+        if (!isset($this->config['components'][$name])) {
+            throw new BadConfigurationException("Component \"$name\" is NOT found!");
         }
 
-        $componentConfig = $this->config[$name];
+        $componentConfig = $this->config['components'][$name];
         $class = $componentConfig['class'];
 
         $component = new $class;
@@ -66,6 +95,23 @@ class Application extends Component {
         return $this->registry;
     }
 
+    protected function createModule($name) {
+        if (!isset($this->config['modules'][$name])) {
+            throw new BadConfigurationException("Module \"$name\" is NOT found!");
+        }
+        //TODO: ...
+    }
+
+    public function getModule($name) {
+        if (isset($this->modules[$name])) {
+            $component = $this->modules[$name];
+        } else {
+            $component = $this->createModule($name);
+            $this->modules[$name] = $component;
+        }
+        return $component;
+    }
+
     public function getCache() {
         return $this->getComponent('cache');
     }
@@ -82,11 +128,32 @@ class Application extends Component {
         
     }
 
+    protected function main() {
+        
+    }
+
+    protected function initialize() {
+        // TODO: internal initializing
+        // ...
+        $this->fireEvent(self::EVENT_APPLICATION_INITIALIZE, NULL);
+    }
+
+    protected function finalize() {
+        $this->fireEvent(self::EVENT_APPLICATION_FINALIZE, NULL);
+        // ...
+        //TODO: internal finalizing
+    }
+
     /**
      * run application
      */
     public function run() {
-        
+        $this->initialize();
+        try {
+            $this->main();
+        } finally {
+            $this->finalize();
+        }
     }
 
 }
