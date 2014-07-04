@@ -39,10 +39,16 @@ class Dispatcher extends Component {
      * dispatch requests
      * 
      * @param \My\Request $request
-     * @param \My\Response $response
+     * @return \My\Response 
      */
-    public function dispatch(Request $request, Response $response) {
-        
+    public function dispatch(Request $request) {
+        foreach ($this->routers as $router) {
+            if ($router->match($request)) {
+                $response = $router->invoke($request);
+                return $response;
+            }
+        }
+        return \NULL;
     }
 
 }

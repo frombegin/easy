@@ -17,4 +17,11 @@ interface IRouter {
      * @return Boolean
      */
     public function match(Request $request);
+    
+    /**
+     * 
+     * @param \My\Mvc\Request $request
+     * @return \My\Mvc\Response
+     */
+    public function invoke(Request $request);
 }

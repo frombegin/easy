@@ -12,5 +12,14 @@ namespace My\Mvc;
  * @author baohua
  */
 class Request {
-    //put your code here
+
+    private $path;
+
+    public function __construct() {
+        $this->path = $_SERVER['PATH_INFO'];
+    }
+
+    public function getPath() {
+        return $this->path;
+    }
 }
