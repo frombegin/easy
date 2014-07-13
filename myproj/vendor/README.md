@@ -1,1 +1,0 @@
-this folder contains 3rd liabraries.
