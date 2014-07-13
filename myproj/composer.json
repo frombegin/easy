@@ -1,0 +1,14 @@
+{
+    "name": "vendor/pmproject",
+    "description": "项目pmproject的描述。",
+    "authors": [
+        {
+            "name": "baohua",
+            "email": "your@email.here"
+        }
+    ],
+    "require": {
+        "doctrine/doctrine-bundle": "dev-master",
+        "predis/predis": "dev-master"
+    }
+}
