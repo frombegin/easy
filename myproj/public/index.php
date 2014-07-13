@@ -5,15 +5,16 @@
  */
 
 // register autoloaders
-require_once dirname(__DIR__) . '/frameworks/My/Autoloader.php';
-My\Autoloader::register();
+$ROOT_DIR = dirname(__DIR__);
+$autoloader = require_once $ROOT_DIR . '/vendor/autoload.php';
+$autoloader->add('My', $ROOT_DIR . '/frameworks');
 
 // load application config
 $isDeveloping = TRUE;
 if ($isDeveloping) {
-    $config = require_once dirname(__DIR__) . '/modules/config.development.php';
+    $config = require_once $ROOT_DIR . '/modules/config.development.php';
 } else {
-    $config = require_once dirname(__DIR__) . '/modules/config.production.php';
+    $config = require_once $ROOT_DIR . '/modules/config.production.php';
 }
 
 // create application & run
@@ -23,5 +24,3 @@ $app->run();
 
 var_dump($app->getComponent('cache'));
 var_dump($app->getCache());
-var_dump($app->getDbEngine());
-var_dump($app->getComponent('nonexists'));
